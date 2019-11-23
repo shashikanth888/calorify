@@ -3,15 +3,47 @@
   padding: 0;
 }
 
+#main-button-group {
+  position: relative;
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+#main-button-group button {
+  border: solid 1px black;
+  background: transparent;
+}
+
+#main-button-group button:hover {
+  background: rgb(82, 83, 81);
+}
+
 .typed_banner {
+  position: absolute;
+  top: 50vw;
+}
+#headline {
+  width: 70%;
+  margin: auto;
 }
 
 #section-a {
-  position: relative;
-  background: url("https://i.ibb.co/fpXyJb7/Buddha-smalli-Stock-873110824-high.jpg")
-    no-repeat bottom center/cover;
-  height: 400px;
+  background-image: url(https://i.ibb.co/fpXyJb7/Buddha-smalli-Stock-873110824-high.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
   text-align: center;
   color: white;
   font-size: 25px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+#section-a-innertext {
+  position: relative;
+  top: 10vh;
+}
+
+#headline {
+  padding-top: 15%;
 }
