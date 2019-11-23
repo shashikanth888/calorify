@@ -1,41 +1,37 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import Typed from "react-typed";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+// import Container from "react-bootstrap/Container";
+// import Row from "react-bootstrap/Row";
+// import Col from "react-bootstrap/Col";
 // import Webcam from "react-webcam";
+// import Jumbotron from "react-bootstrap/Jumbotron";
 
 export default function LandingPage() {
   return (
     <header>
       {/* NavBar */}
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">Calorify</Navbar.Brand>
+        <Navbar.Brand style={{ textTransform: "Uppercase" }} href="#home">
+          Calorify
+        </Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="#home">1</Nav.Link>
           <Nav.Link href="#features">2</Nav.Link>
           <Nav.Link href="#pricing">3</Nav.Link>
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info">Search</Button>
-        </Form>
       </Navbar>
-      <br />
 
+      {/* Banner */}
       <section id="section-a">
         <div className="container-fluid">
           <div className="typed_banner">
             <Typed
               style={{
                 fontFamily: "'Tomorrow', sans-serif",
-                fontSize: "40px",
+                fontSize: "60px",
                 fontWeight: "100"
               }}
               strings={["Calorify..."]}
@@ -46,7 +42,7 @@ export default function LandingPage() {
             <Typed
               style={{
                 fontFamily: "'Tomorrow', sans-serif",
-                fontSize: "20px"
+                fontSize: "30px"
               }}
               strings={["Estimate the food on your plate."]}
               typeSpeed={50}
@@ -65,7 +61,6 @@ export default function LandingPage() {
           </p>
         </div>
       </section>
-      {/* <Webcam /> */}
     </header>
   );
 }
