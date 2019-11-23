@@ -8,8 +8,8 @@ const model = new Clarifai.App({ apiKey: "1f9bb490007547d4a0070b895e9487e2" });
 
 var port = process.env.PORT || 3000;
 
-// var firebase_controller = require("./controllers/firebase_cloud");
-// firebase_controller(app);
+var firebase_controller = require("./controllers/firebase_cloud");
+firebase_controller(app);
 
 const setup = () => {
   app.use(bodyparser.urlencoded({ extended: false }));
@@ -17,8 +17,9 @@ const setup = () => {
   app.get("/", (req, res) => res.send("Hello World!"));
   app.get("/api/imageurl", function(req, res) {
     url = req.query.url;
+    
 
-    detect(url, res);
+    detect(data, res);
   });
   app.post("/api/base64", (req, res) => {
     image = req.body.img;
