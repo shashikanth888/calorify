@@ -1,8 +1,9 @@
 import cv2 as cv
+import base64, io, math
 import numpy as np
-import argparse
 import random as rng
-import math
+from imageio import imread
+import matplotlib.pyplot as plt
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -37,10 +38,16 @@ def thresh_callback(val, src_gray):
     # cv.imshow('Contours', drawing)
     return radius, boundRect
 
-def size(url):
-    src = cv.imread(cv.samples.findFile('1.jpg'))
+def size(data):
+    b64_bytes = base64.b64encode(data)
+    b64_string = b64_bytes.decode()
+    img = imread(io.BytesIO(base64.b64decode(b64_string)))
+    cv_img = cv.cvtColor(img, cv.COLOR_RGB2BGR)
+    cv.imwrite("food.jpg", cv_img)
+
+    src = cv.imread(cv.samples.findFile("food.jpg"))
     if src is None:
-        print('Could not open or find the image:', args.input)
+        print('Could not open or find the image')
         return
     src_gray = cv.cvtColor(src, cv.COLOR_BGR2GRAY)
     src_gray = cv.blur(src_gray, (3,3))
