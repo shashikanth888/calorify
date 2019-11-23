@@ -1,4 +1,4 @@
-var bodyparser = require("body-parser");
+var bodyparser = require('body-parser');
 const vision = require("@google-cloud/vision");
 
 const client = new vision.ImageAnnotatorClient();
