@@ -8,6 +8,7 @@ module.exports = function(app) {
   app.use(bodyparser.urlencoded({ extended: true }));
 
   app.post("/api/imageurl", function(req, res) {
+    console.log(req.body);
     url = req.body.url;
     detect_food(url);
     res.send("received");
