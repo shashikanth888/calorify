@@ -32,19 +32,24 @@ detect = url => {
     .then(response => {
       out = {
         name: response.outputs[0].data.concepts[0].name,
-        confidence: response.outputs[0].data.concepts[0].value
+        confidence: response.outputs[0].data.concepts[0].value,
+        address: "http://localhost:5000/?url=" + url
       };
-      return out, address;
+      return out;
     })
     .then(make_req);
 };
 
-make_req = (out, address) =>
-  request(address, { json: true }, (err, res, body) => {
+make_req = out => {
+  request(out.address, { json: true }, (err, res, body) => {
+    out.width = body.width;
+    out.length = body.length;
+    out.area = body.area;
+    out.height = body.height;
     if (err) {
-      return console.log(err);
+      console.log(err);
     }
-    console.log(body);
   });
+};
 
 setup();

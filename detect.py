@@ -34,12 +34,10 @@ def thresh_callback(val, src_gray):
     cv.rectangle(drawing, (int(boundRect[0]), int(boundRect[1])), \
         (int(boundRect[0]+boundRect[2]), int(boundRect[1]+boundRect[3])), color, 2)
     cv.circle(drawing, (int(centers[0]), int(centers[1])), int(radius), color, 2)
-    cv.imshow('Contours', drawing)
+    # cv.imshow('Contours', drawing)
     return radius, boundRect
 
-@app.route('/')
-def size():
-    url = request.args.get('url')
+def size(url):
     src = cv.imread(cv.samples.findFile('1.jpg'))
     if src is None:
         print('Could not open or find the image:', args.input)
@@ -48,15 +46,28 @@ def size():
     src_gray = cv.blur(src_gray, (3,3))
     ret, src_gray = cv.threshold(src_gray, 127, 255, cv.THRESH_TOZERO)
 
-    source_window = 'Source'
-    cv.namedWindow(source_window)
-    cv.imshow(source_window, src)
-    max_thresh = 255
+    # source_window = 'Source'
+    # cv.namedWindow(source_window)
+    # cv.imshow(source_window, src)
+    # max_thresh = 255
     thresh = 100
-    cv.createTrackbar('Canny thresh:', source_window, thresh, max_thresh, thresh_callback)
+    # cv.createTrackbar('Canny thresh:', source_window, thresh, max_thresh, thresh_callback)
     radius, rect = thresh_callback(thresh, src_gray)
     cv.waitKey()
-    return jsonify(area = math.pi*(radius*2.54/96)**2)
+    return math.pi*(radius*2.54/96)**2, rect
+
+@app.route('/')
+def record_food():
+    urltop = request.args.get('urlside')
+    urlside = request.args.get('urltop')
+    area, recttop = size(urltop)
+    _, rectside = size(urlside)
+    return jsonify(
+        area=area,
+        height=rectside[3]-rectside[1],
+        width=recttop[3]-recttop[1],
+        length=recttop[2]-recttop[0]
+        )
 
 if __name__ == '__main_':
     app.run(debug=True, port=5000) #run app in debug mode on port 5000
