@@ -98,10 +98,53 @@ let calc_macro = (out, res) => {
           nutrients: foods[0].nutrients,
           time_consumed: foods[0].consumed_at
         };
+        save_food(macros);
         res.send(macros);
       }
     }
   );
+};
+
+let save_food = macros => {
+  request.post(
+    {
+      url: "https://billwu95.api.stdlib.com/http-project@dev/warning/",
+      json: {
+        Potassium: parseFloat(macros.potassium),
+        Suger: parseFloat(macros.sugar),
+        Fiber: parseFloat(macros.fiber),
+        Cholesterol: parseFloat(macros.cholesteral),
+        SaturatedFats: parseFloat(macros.saturated_fat),
+        Name: macros.name,
+        ServingWeight: parseFloat(macros.serving_weight_grams),
+        Fats: parseFloat(macros.total_fat),
+        Carbohydrates: parseFloat(macros.carbs),
+        Calories: parseFloat(macros.calories),
+        Protein: parseFloat(macros.protein),
+        Nutrients: macros.nutrients,
+        Sodium: parseFloat(macros.sodium),
+        Day: get_date()
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    },
+    function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log("Successfully saved object");
+      }
+    }
+  );
+};
+
+let get_date = () => {
+  var d = new Date(),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+  return [year, month, day].join("-");
 };
 
 setup();
