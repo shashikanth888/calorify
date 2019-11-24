@@ -15,9 +15,11 @@ const setup = () => {
   app.use(bodyparser.urlencoded({ extended: false }));
   app.use(bodyparser.json());
   app.get("/", (req, res) => res.send("Hello World!"));
-  app.post("/api/imageurl", function(req, res) {
-    url = req.body.url;
-    detect(data, res);
+  app.get("/api/imageurl", function(req, res) {
+    url1 = "PATH-TO-IMAGE/image1.jpg";
+    url2 = "PATH-TO-IMAGE/image2.jpg";
+
+    detect(url1, url2, res);
   });
   app.post("/api/base64", (req, res) => {
     image = req.body.img;
@@ -25,14 +27,14 @@ const setup = () => {
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 };
 
-let detect = (data, res) => {
+let detect = (url1, url2, res) => {
   model.models
-    .predict("bd367be194cf45149e75f01d59f77ba7", url)
+    .predict("bd367be194cf45149e75f01d59f77ba7", url1)
     .then(response => {
       out = {
         name: response.outputs[0].data.concepts[0].name,
         confidence: response.outputs[0].data.concepts[0].value,
-        address: "http://localhost:5000/?url=" + data
+        address: "http://localhost:5000/?url1=" + url1 + "&url2=" + url2
       };
       return out, res;
     })
