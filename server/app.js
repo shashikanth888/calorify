@@ -15,10 +15,8 @@ const setup = () => {
   app.use(bodyparser.urlencoded({ extended: false }));
   app.use(bodyparser.json());
   app.get("/", (req, res) => res.send("Hello World!"));
-  app.get("/api/imageurl", function(req, res) {
-    url = req.query.url;
-    
-
+  app.post("/api/imageurl", function(req, res) {
+    url = req.body.url;
     detect(data, res);
   });
   app.post("/api/base64", (req, res) => {
@@ -29,7 +27,7 @@ const setup = () => {
 
 let detect = (data, res) => {
   model.models
-    .predict("bd367be194cf45149e75f01d59f77ba7", { base64: data })
+    .predict("bd367be194cf45149e75f01d59f77ba7", url)
     .then(response => {
       out = {
         name: response.outputs[0].data.concepts[0].name,
