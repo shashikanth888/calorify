@@ -13,7 +13,7 @@ class App extends Component {
     // axios.get(`http://172.30.181.168:3000/api/test`).then(res => {
     //   console.log(res.data.name);
     // });
-    // fetch("http://172.30.181.168:3000/api/test")
+    // fetch("http://172.30.181.168:4060/api/test")
     //   .then(response => {
     //     console.log(response.json());
     //   })
