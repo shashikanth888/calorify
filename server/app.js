@@ -3,10 +3,11 @@ var bodyparser = require("body-parser");
 var app = express();
 const request = require("request");
 const Clarifai = require("clarifai");
+var imgur = require("imgur");
 
 const model = new Clarifai.App({ apiKey: "1f9bb490007547d4a0070b895e9487e2" });
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 4060;
 
 var firebase_controller = require("./controllers/firebase_cloud");
 firebase_controller(app);
@@ -16,43 +17,67 @@ const setup = () => {
   app.use(bodyparser.json());
   app.get("/", (req, res) => res.send("Hello World!"));
   app.get("/api/imageurl", function(req, res) {
-    url1 = "PATH-TO-IMAGE/image1.jpg";
-    url2 = "PATH-TO-IMAGE/image2.jpg";
+    imgur
+      .uploadFile("0img.jpeg")
+      .then(function(json) {
+        let url = json.data.link;
+        url1 = "./server/0img.jpeg";
+        url2 = "./server/1img.jpeg";
 
-    detect(url1, url2, res);
-  });
-  app.post("/api/base64", (req, res) => {
-    image = req.body.img;
+        detect(url, url1, url2, res);
+        console.log(json.data.link);
+      })
+      .catch(function(err) {
+        console.error(err.message);
+      });
   });
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 };
 
-let detect = (url1, url2, res) => {
+let detect = (url, url1, url2, res) => {
   model.models
-    .predict("bd367be194cf45149e75f01d59f77ba7", url1)
+    .predict("bd367be194cf45149e75f01d59f77ba7", url)
     .then(response => {
+      console.log(response);
       out = {
         name: response.outputs[0].data.concepts[0].name,
         confidence: response.outputs[0].data.concepts[0].value,
-        address: "http://localhost:5000/?url1=" + url1 + "&url2=" + url2
+        address: "http://localhost:5000",
+        url1: url1,
+        url2,
+        url2
       };
+      console.log(out);
       return out, res;
     })
     .then(make_req);
 };
 
 let make_req = (out, res) => {
-  request(out.address, { json: true }, (err, res, body) => {
-    out.width = body.width;
-    out.length = body.length;
-    out.area = body.area;
-    out.height = body.height;
-    if (err) {
-      console.log(err);
+  console.log("calling python");
+  request.post(
+    {
+      url: out.address,
+      json: {
+        url1: out.url1,
+        url2: out.url2
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    },
+    (err, response, body) => {
+      out.width = body.width;
+      out.length = body.length;
+      out.area = body.area;
+      out.height = body.height;
+      if (err) {
+        console.log(err);
+      }
+      console.log(body);
+      calc_macro(out, res);
     }
-    console.log(body);
-    calc_macro(out, res);
-  });
+  );
 };
 
 let calc_macro = (out, res) => {
