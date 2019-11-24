@@ -57,11 +57,10 @@ def size(url):
     cv.waitKey()
     return math.pi*(radius*2.54/96)**2, rect
 
-@app.route('/index')
+@app.route('/')
 def record_food():
-    print("entered...")
-    urltop = request.json.url1
-    urlside = request.json.url2
+    urltop = request.args.get('url1')
+    urlside = request.args.get('url2')
     print(urltop)
     print(urlside)
     area, recttop = size(urltop)
@@ -74,4 +73,4 @@ def record_food():
         )
 
 if __name__ == '__main_':
-    app.run(debug=True, port=5000) #run app in debug mode on port 5000
+    app.run(debug=True, port=5200)

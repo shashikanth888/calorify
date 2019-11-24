@@ -4,6 +4,7 @@ var app = express();
 const request = require("request");
 const Clarifai = require("clarifai");
 var imgur = require("imgur");
+const axios = require("axios");
 
 const model = new Clarifai.App({ apiKey: "1f9bb490007547d4a0070b895e9487e2" });
 
@@ -25,7 +26,7 @@ const setup = () => {
         url2 = "./server/1img.jpeg";
 
         detect(url, url1, url2, res);
-        console.log(json.data.link);
+        // console.log(json.data.link);
       })
       .catch(function(err) {
         console.error(err.message);
@@ -38,46 +39,19 @@ let detect = (url, url1, url2, res) => {
   model.models
     .predict("bd367be194cf45149e75f01d59f77ba7", url)
     .then(response => {
-      console.log(response);
       out = {
         name: response.outputs[0].data.concepts[0].name,
         confidence: response.outputs[0].data.concepts[0].value,
-        address: "http://localhost:5000",
-        url1: url1,
-        url2,
-        url2
+        address: "http://localhost:5000/?url1=" + url1 + "&url2=" + url2
       };
-      console.log(out);
-      return out, res;
-    })
-    .then(make_req);
+      make_req(out, res);
+    });
 };
 
-let make_req = (out, res) => {
-  console.log("calling python");
-  request.post(
-    {
-      url: out.address,
-      json: {
-        url1: out.url1,
-        url2: out.url2
-      },
-      headers: {
-        "Content-Type": "application/json"
-      }
-    },
-    (err, response, body) => {
-      out.width = body.width;
-      out.length = body.length;
-      out.area = body.area;
-      out.height = body.height;
-      if (err) {
-        console.log(err);
-      }
-      console.log(body);
-      calc_macro(out, res);
-    }
-  );
+make_req = (out, res) => {
+  axios.get(out.address).then(function(response) {
+    calc_macro(out, res);
+  });
 };
 
 let calc_macro = (out, res) => {
@@ -106,22 +80,20 @@ let calc_macro = (out, res) => {
     },
     function(error, response, body) {
       if (!error && response.statusCode == 200) {
+        console.log(body);
         macros = {
-          name: foods[0].food_name,
-          serving_qty: foods[0].serving_qty,
-          serving_weight_grams: foods[0].serving_weight_grams,
-          calories: foods[0].calories,
-          total_fat: foods[0].total_fat,
-          saturated_fat: foods[0].saturated_fat,
-          cholesteral: foods[0].cholesteral,
-          sodium: foods[0].sodium,
-          carbs: foods[0].total_carbohydrate,
-          fiber: foods[0].fiber,
-          sugar: foods[0].sugars,
-          protein: foods[0].protein,
-          potassium: foods[0].potassium,
-          nutrients: foods[0].nutrients,
-          time_consumed: foods[0].consumed_at
+          name: body.foods[0].food_name,
+          serving_weight_grams: body.foods[0].serving_weight_grams,
+          calories: body.foods[0].nf_calories,
+          total_fat: body.foods[0].nf_total_fat,
+          saturated_fat: body.foods[0].nf_saturated_fat,
+          cholesteral: body.foods[0].nf_cholesteral,
+          sodium: body.foods[0].nf_sodium,
+          carbs: body.foods[0].nf_total_carbohydrate,
+          fiber: body.foods[0].nf_fiber,
+          sugar: body.foods[0].nf_sugars,
+          protein: body.foods[0].nf_protein,
+          potassium: body.foods[0].nf_potassium
         };
         save_food(macros);
         res.send(macros);
@@ -146,7 +118,6 @@ let save_food = macros => {
         Carbohydrates: parseFloat(macros.carbs),
         Calories: parseFloat(macros.calories),
         Protein: parseFloat(macros.protein),
-        Nutrients: macros.nutrients,
         Sodium: parseFloat(macros.sodium),
         Day: get_date()
       },
