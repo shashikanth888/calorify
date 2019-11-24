@@ -38,14 +38,8 @@ def thresh_callback(val, src_gray):
     # cv.imshow('Contours', drawing)
     return radius, boundRect
 
-def size(data):
-    b64_bytes = base64.b64encode(data)
-    b64_string = b64_bytes.decode()
-    img = imread(io.BytesIO(base64.b64decode(b64_string)))
-    cv_img = cv.cvtColor(img, cv.COLOR_RGB2BGR)
-    cv.imwrite("food.jpg", cv_img)
-
-    src = cv.imread(cv.samples.findFile("food.jpg"))
+def size(url):
+    src = cv.imread(cv.samples.findFile(url))
     if src is None:
         print('Could not open or find the image')
         return
