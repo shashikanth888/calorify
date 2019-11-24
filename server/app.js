@@ -110,10 +110,19 @@ let save_food = macros => {
     {
       url: "https://billwu95.api.stdlib.com/http-project@dev/warning/",
       json: {
-        Fats: macros.total_fat,
-        Carbohydrates: macros.carbs,
-        Calories: macros.calories,
-        Protein: macros.protein
+        Potassium: parseFloat(macros.potassium),
+        Suger: parseFloat(macros.sugar),
+        Fiber: parseFloat(macros.fiber),
+        Cholesterol: parseFloat(macros.cholesteral),
+        SaturatedFats: parseFloat(macros.saturated_fat),
+        Name: macros.name,
+        ServingWeight: parseFloat(macros.serving_weight_grams),
+        Fats: parseFloat(macros.total_fat),
+        Carbohydrates: parseFloat(macros.carbs),
+        Calories: parseFloat(macros.calories),
+        Protein: parseFloat(macros.protein),
+        Nutrients: macros.nutrients,
+        Sodium: parseFloat(macros.sodium)
       },
       headers: {
         "Content-Type": "application/json"
