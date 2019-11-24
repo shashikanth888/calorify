@@ -12,9 +12,9 @@ import Typed from "react-typed";
 export default function LandingPage() {
   return (
     <header>
-      <div style={{ display: "flex" }}>
+      <div>
         {/* NavBar */}
-        <div style={{ flex: 1 }} id="navbar">
+        <div id="navbar">
           <Navbar fixed="top" bg="dark" variant="dark">
             <Navbar.Brand style={{ textTransform: "Uppercase" }} href="#home">
               Calorify
