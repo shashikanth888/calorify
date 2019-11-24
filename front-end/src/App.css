@@ -68,11 +68,17 @@
   font-size: 25px;
   height: 80vh;
 }
+#section-c {
+  text-align: center;
+  font-size: 25px;
+  background: palegoldenrod;
+}
 
 #cc-submitButton {
   border: solid 1px black;
   width: 10%;
-  background-color: slategray;
+  background: cornflowerblue;
+  color: black;
 }
 
 #cc-submitButton:hover {

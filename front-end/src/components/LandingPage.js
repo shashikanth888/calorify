@@ -15,10 +15,47 @@ export default function LandingPage() {
     <header>
       <div>
         {/* NavBar */}
-        <div id="navbar">
-          <Navbar fixed="top" bg="dark" variant="dark">
-            <Navbar.Brand style={{ textTransform: "Uppercase" }} href="#home">
+        <Navbar fixed="top" bg="dark" variant="dark">
+          <Navbar.Brand href="#home">
+            <Link
+              style={{ textTransform: "Uppercase" }}
+              activeClass="active"
+              to="section-a"
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
+            >
+              Calorify
+            </Link>
+          </Navbar.Brand>
+
+          <div id="main-button-group" className="d-flex flex-column">
+            <ButtonGroup size="sm">
               <Link
+                className="links btn"
+                activeClass="active"
+                to="section-b"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+              >
+                Calculate Calories
+              </Link>
+              <Link
+                className="links btn"
+                activeClass="active"
+                to="section-c"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+              >
+                Know Your Nutrition History
+              </Link>
+              <Link
+                className="links btn"
                 activeClass="active"
                 to="section-a"
                 spy={true}
@@ -26,51 +63,13 @@ export default function LandingPage() {
                 offset={-70}
                 duration={500}
               >
-                Calorify
+                Food Facts
               </Link>
-            </Navbar.Brand>
-
-            <div id="main-button-group" className="d-flex flex-column">
-              <ButtonGroup size="sm">
-                <Link
-                  className="links btn"
-                  activeClass="active"
-                  to="section-b"
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
-                >
-                  Calculate Calories
-                </Link>
-                <Link
-                  className="links btn"
-                  activeClass="active"
-                  to="section-b"
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
-                >
-                  Know Your Nutrition History
-                </Link>
-                <Link
-                  className="links btn"
-                  activeClass="active"
-                  to="section-b"
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
-                >
-                  Food Facts
-                </Link>
-                {/* <Button>Know Your Nutrition History</Button>
+              {/* <Button>Know Your Nutrition History</Button>
                 <Button>Food Facts</Button> */}
-              </ButtonGroup>
-            </div>
-          </Navbar>
-        </div>
+            </ButtonGroup>
+          </div>
+        </Navbar>
       </div>
 
       {/* Banner */}

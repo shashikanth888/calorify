@@ -1,24 +1,23 @@
 import React, { Component } from "react";
 import Camera, { IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
-import Button from "react-bootstrap/Button";
 import axios from "axios";
+import { Link } from "react-scroll";
 
 export default class CalculateCalories extends Component {
-  componentDidMount() {
-    axios.get(`http://localhost:4060/api/imageurl`).then(res => {
-      console.log(res);
+  state = {
+    data: {}
+  };
+  continue = e => {
+    e.preventDefault();
+    axios.get(`http://172.30.181.168:4060/api/test`).then(res => {
+      this.props.handleChange(res.data);
     });
-    fetch("http://localhost:4060/api/imageurl").then(response => {
-      console.log(response.json());
-    });
-  }
+  };
   onTakePhoto(dataUri) {
     saveBase64AsFile(dataUri);
   }
   render() {
-    const { handleChange } = this.props;
-
     return (
       <section id="section-b">
         <div className="container-fluid">
@@ -29,9 +28,20 @@ export default class CalculateCalories extends Component {
               this.onTakePhoto(dataUri);
             }}
           />
-          <Button id="cc-submitButton" type="submit" onClick={this.continue}>
+
+          <Link
+            id="cc-submitButton"
+            onClick={this.continue}
+            type="submit"
+            activeClass="active"
+            to="section-c"
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+          >
             Submit
-          </Button>
+          </Link>
         </div>
       </section>
     );
