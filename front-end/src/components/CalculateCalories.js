@@ -17,6 +17,8 @@ export default class CalculateCalories extends Component {
     saveBase64AsFile(dataUri);
   }
   render() {
+    const { handleChange } = this.props;
+
     return (
       <section id="section-b">
         <div className="container-fluid">
