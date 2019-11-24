@@ -98,7 +98,30 @@ let calc_macro = (out, res) => {
           nutrients: foods[0].nutrients,
           time_consumed: foods[0].consumed_at
         };
+        save_food(macros);
         res.send(macros);
+      }
+    }
+  );
+};
+
+let save_food = macros => {
+  request.post(
+    {
+      url: "https://billwu95.api.stdlib.com/http-project@dev/warning/",
+      json: {
+        Fats: macros.total_fat,
+        Carbohydrates: macros.carbs,
+        Calories: macros.calories,
+        Protein: macros.protein
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    },
+    function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log("Successfully saved object");
       }
     }
   );
