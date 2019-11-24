@@ -122,7 +122,8 @@ let save_food = macros => {
         Calories: parseFloat(macros.calories),
         Protein: parseFloat(macros.protein),
         Nutrients: macros.nutrients,
-        Sodium: parseFloat(macros.sodium)
+        Sodium: parseFloat(macros.sodium),
+        Day: get_date()
       },
       headers: {
         "Content-Type": "application/json"
@@ -134,6 +135,16 @@ let save_food = macros => {
       }
     }
   );
+};
+
+let get_date = () => {
+  var d = new Date(),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+  return [year, month, day].join("-");
 };
 
 setup();
