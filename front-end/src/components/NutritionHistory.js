@@ -26,23 +26,32 @@ class NutritionHistory extends Component {
           <React.Fragment>
             <List>
               <ListItem primaryText="Name" secondaryText={name} />
-              <ListItem primaryText="Potassium" secondaryText={potassium} />
-              <ListItem primaryText="Sugar" secondaryText={sugar} />
-              <ListItem primaryText="Fiber" secondaryText={fiber} />
-              <ListItem primaryText="Cholesterol" secondaryText={cholesteral} />
               <ListItem
-                primaryText="Serving Weight"
+                primaryText="Potassium (mg)"
+                secondaryText={potassium}
+              />
+              <ListItem primaryText="Sugar (g)" secondaryText={sugar} />
+              <ListItem primaryText="Fiber (g)" secondaryText={fiber} />
+              <ListItem
+                primaryText="Cholesterol (mg)"
+                secondaryText={cholesteral}
+              />
+              <ListItem
+                primaryText="Serving Weight (g)"
                 secondaryText={serving_weight_grams}
               />
               <ListItem
-                primaryText="Saturated Fat"
+                primaryText="Saturated Fat (g)"
                 secondaryText={saturated_fat}
               />
-              <ListItem primaryText="Total Fats" secondaryText={total_fat} />
-              <ListItem primaryText="Carbohydrates" secondaryText={carbs} />
+              <ListItem
+                primaryText="Total Fats (g)"
+                secondaryText={total_fat}
+              />
+              <ListItem primaryText="Carbohydrates (g)" secondaryText={carbs} />
               <ListItem primaryText="Calories" secondaryText={calories} />
-              <ListItem primaryText="Protein" secondaryText={protein} />
-              <ListItem primaryText="Sodium" secondaryText={sodium} />
+              <ListItem primaryText="Protein (g)" secondaryText={protein} />
+              <ListItem primaryText="Sodium (mg)" secondaryText={sodium} />
             </List>
           </React.Fragment>
         </MuiThemeProvider>
