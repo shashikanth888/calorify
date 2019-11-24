@@ -9,12 +9,16 @@
   margin: auto;
   text-align: center;
 }
-#main-button-group button {
-  border: solid 1px black;
+#main-button-group .links {
+  border: solid 2px black;
+  margin: 1px;
+  padding: 0.5em 0;
+  color: white;
   background: transparent;
+  font-size: 14px;
 }
 
-#main-button-group button:hover {
+#main-button-group .links:hover {
   background: rgb(82, 83, 81);
 }
 
@@ -31,7 +35,7 @@
   background-image: url(https://i.ibb.co/fpXyJb7/Buddha-smalli-Stock-873110824-high.jpg);
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 110vh;
   text-align: center;
   color: white;
   font-size: 25px;
@@ -51,11 +55,26 @@
 #video-container {
   position: relative;
   left: 30vw;
-  width: 100%;
-  margin: auto;
-  border: solid 5px black;
 }
 
 #section-b {
+  padding-top: 3%;
   background-image: url(https://i.ibb.co/sKKRBrc/curtis-macnewton-5r-KPe-Fcs-STY-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 110vh;
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  height: 80vh;
+}
+
+#cc-submitButton {
+  border: solid 1px black;
+  width: 10%;
+  background-color: slategray;
+}
+
+#cc-submitButton:hover {
+  background: rgb(82, 83, 81);
 }

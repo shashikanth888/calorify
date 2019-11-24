@@ -1,8 +1,9 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Button from "react-bootstrap/Button";
 import Typed from "react-typed";
+import { Link } from "react-scroll";
+
 // import Container from "react-bootstrap/Container";
 // import Row from "react-bootstrap/Row";
 // import Col from "react-bootstrap/Col";
@@ -17,14 +18,55 @@ export default function LandingPage() {
         <div id="navbar">
           <Navbar fixed="top" bg="dark" variant="dark">
             <Navbar.Brand style={{ textTransform: "Uppercase" }} href="#home">
-              Calorify
+              <Link
+                activeClass="active"
+                to="section-a"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+              >
+                Calorify
+              </Link>
             </Navbar.Brand>
 
             <div id="main-button-group" className="d-flex flex-column">
-              <ButtonGroup styel={{ margin: "auto" }} size="sm">
-                <Button>Calculate Calories</Button>
-                <Button>Know Your Nutrition History</Button>
-                <Button>Food Facts</Button>
+              <ButtonGroup size="sm">
+                <Link
+                  className="links btn"
+                  activeClass="active"
+                  to="section-b"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  Calculate Calories
+                </Link>
+                <Link
+                  className="links btn"
+                  activeClass="active"
+                  to="section-b"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  Know Your Nutrition History
+                </Link>
+                <Link
+                  className="links btn"
+                  activeClass="active"
+                  to="section-b"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  Food Facts
+                </Link>
+                {/* <Button>Know Your Nutrition History</Button>
+                <Button>Food Facts</Button> */}
               </ButtonGroup>
             </div>
           </Navbar>
@@ -50,7 +92,7 @@ export default function LandingPage() {
               fontFamily: "'Tomorrow', sans-serif",
               fontSize: "60px"
             }}
-            strings={["Estimate the food on your plate."]}
+            strings={["Estimate the nutrients on your plate."]}
             typeSpeed={50}
             startDelay={800}
             showCursor={true}
@@ -61,11 +103,10 @@ export default function LandingPage() {
               {" "}
               You Don't Need To Be <strong>Perfect</strong>. Just{" "}
               <strong>BE BETTER</strong> Than You Were Yesterday{" "}
-              <h1>
-                This Starts With Your <strong>Health!</strong>
-              </h1>
-              .
             </p>
+            <h1 style={{ display: "inline" }}>
+              This Starts With Your <strong>Health!</strong>
+            </h1>
           </div>
         </div>
       </section>

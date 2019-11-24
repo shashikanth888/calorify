@@ -8,22 +8,6 @@ import CalculateCalories from "./components/CalculateCalories";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 class App extends Component {
-  componentDidMount() {
-    // // let userDataForm = document.getElementById("user-from");
-    // axios.get(`http://172.30.181.168:4060/api/test`).then(res => {
-    //   console.log(res.data.name);
-    // });
-    // fetch("http://172.30.181.168:4060/api/test")
-    //   .then(response => {
-    //     console.log(response.json());
-    //   })
-    //   .then(json => {
-    //     this.setState({
-    //       user: json
-    //     });
-    //   });
-  }
-
   render() {
     return (
       <div>
