@@ -10,7 +10,7 @@ export default class CalculateCalories extends Component {
   };
   continue = e => {
     e.preventDefault();
-    axios.get(`http://172.30.181.168:4060/api/test`).then(res => {
+    axios.get(`http://localhost:4060/api/imageurl`).then(res => {
       this.props.handleChange(res.data);
     });
   };

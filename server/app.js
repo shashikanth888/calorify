@@ -35,8 +35,7 @@ const setup = () => {
         url1 = "./server/0img.jpeg";
         url2 = "./server/1img.jpeg";
 
-        detect_food(url);
-        // detect(url, url1, url2, res);
+        detect(url, url1, url2, res);
         // console.log(json.data.link);
       })
       .catch(function(err) {
@@ -58,13 +57,6 @@ let detect = (url, url1, url2, res) => {
       make_req(out, res);
     });
 };
-
-async function detect_food(url) {
-  const [result] = await client.labelDetection(url);
-  const labels = result.labelAnnotations;
-  console.log("Labels:");
-  labels.forEach(label => console.log(label.description));
-}
 
 make_req = (out, res) => {
   axios.get(out.address).then(function(response) {
