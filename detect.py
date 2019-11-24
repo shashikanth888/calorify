@@ -1,9 +1,9 @@
 import cv2 as cv
+import os
 import base64, io, math
 import numpy as np
 import random as rng
 from imageio import imread
-import matplotlib.pyplot as plt
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -57,10 +57,13 @@ def size(url):
     cv.waitKey()
     return math.pi*(radius*2.54/96)**2, rect
 
-@app.route('/')
+@app.route('/index')
 def record_food():
-    urltop = request.args.get('urlside')
-    urlside = request.args.get('urltop')
+    print("entered...")
+    urltop = request.json.url1
+    urlside = request.json.url2
+    print(urltop)
+    print(urlside)
     area, recttop = size(urltop)
     _, rectside = size(urlside)
     return jsonify(
