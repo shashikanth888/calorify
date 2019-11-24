@@ -47,3 +47,15 @@
 #headline {
   padding-top: 13%;
 }
+
+#video-container {
+  position: relative;
+  left: 30vw;
+  width: 100%;
+  margin: auto;
+  border: solid 5px black;
+}
+
+#section-b {
+  background-image: url(https://i.ibb.co/sKKRBrc/curtis-macnewton-5r-KPe-Fcs-STY-unsplash.jpg);
+}

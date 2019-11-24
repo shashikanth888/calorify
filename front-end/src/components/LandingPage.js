@@ -27,23 +27,6 @@ export default function LandingPage() {
                 <Button>Food Facts</Button>
               </ButtonGroup>
             </div>
-
-            {/* <div
-              style={{ width: "100%" }}
-              id="main-button-group"
-              className="container mr-auto"
-            >
-              <button>Calculate Calories</button>
-              <button>Know Your Nutrition History</button>
-              <button>Food Facts</button>
-            </div> */}
-            {/* <Nav className="mr-auto">
-              <Nav.Link classname="btn" href="#">
-                Calculate Calories
-              </Nav.Link>
-              <Nav.Link href="#">Know Your Nutrition History</Nav.Link>
-              <Nav.Link href="#">Food Facts</Nav.Link>
-            </Nav> */}
           </Navbar>
         </div>
       </div>

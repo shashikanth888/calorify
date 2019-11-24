@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import LandingPage from "./components/LandingPage";
-// import CalculateCalories from "./components/CalculateCalories";
+import CalculateCalories from "./components/CalculateCalories";
 // import NutritionHistory from "./components/NutritionHistory";
 // import FoodFacts from "./components/FoodFacts";
 // import axios from "axios";
@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <div>
         <LandingPage />
-        {/* <CalculateCalories /> */}
+        <CalculateCalories />
         {/* <NutritionHistory /> */}
         {/* <FoodFacts /> */}
       </div>
