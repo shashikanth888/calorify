@@ -61,8 +61,6 @@ def size(url):
 def record_food():
     urltop = request.args.get('url1')
     urlside = request.args.get('url2')
-    print(urltop)
-    print(urlside)
     area, recttop = size(urltop)
     _, rectside = size(urlside)
     return jsonify(
@@ -73,4 +71,4 @@ def record_food():
         )
 
 if __name__ == '__main_':
-    app.run(debug=True, port=5200)
+    app.run(debug=True, port=5000)

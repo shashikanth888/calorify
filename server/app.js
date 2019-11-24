@@ -16,6 +16,16 @@ firebase_controller(app);
 const setup = () => {
   app.use(bodyparser.urlencoded({ extended: false }));
   app.use(bodyparser.json());
+
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+
   app.get("/", (req, res) => res.send("Hello World!"));
   app.get("/api/imageurl", function(req, res) {
     imgur
@@ -25,7 +35,8 @@ const setup = () => {
         url1 = "./server/0img.jpeg";
         url2 = "./server/1img.jpeg";
 
-        detect(url, url1, url2, res);
+        detect_food(url);
+        // detect(url, url1, url2, res);
         // console.log(json.data.link);
       })
       .catch(function(err) {
@@ -47,6 +58,13 @@ let detect = (url, url1, url2, res) => {
       make_req(out, res);
     });
 };
+
+async function detect_food(url) {
+  const [result] = await client.labelDetection(url);
+  const labels = result.labelAnnotations;
+  console.log("Labels:");
+  labels.forEach(label => console.log(label.description));
+}
 
 make_req = (out, res) => {
   axios.get(out.address).then(function(response) {
@@ -80,7 +98,6 @@ let calc_macro = (out, res) => {
     },
     function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        console.log(body);
         macros = {
           name: body.foods[0].food_name,
           serving_weight_grams: body.foods[0].serving_weight_grams,
