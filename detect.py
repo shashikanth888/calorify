@@ -65,9 +65,9 @@ def record_food():
     _, rectside = size(urlside)
     return jsonify(
         area=area,
-        height=rectside[3]-rectside[1],
-        width=recttop[3]-recttop[1],
-        length=recttop[2]-recttop[0]
+        height=rectside[1]-rectside[3],
+        width=recttop[1]-recttop[3],
+        length=recttop[0]-recttop[2]
         )
 
 if __name__ == '__main_':

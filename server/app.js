@@ -60,21 +60,26 @@ let detect = (url, url1, url2, res) => {
 
 make_req = (out, res) => {
   axios.get(out.address).then(function(response) {
+    out.area = response.data.area;
+    out.height = response.data.height;
+    out.width = response.data.width;
+    out.length = response.data.length;
     calc_macro(out, res);
   });
 };
 
 let calc_macro = (out, res) => {
-  volume = out.area * out.height;
-  density_map = {
-    apple: 0.2401,
-    egg: 1.031,
-    banana: 1,
-    "chocolate bar": 1.325,
-    default: 1
-  };
-  name = out.name;
-  mass = density_map.name * volume || volume;
+  volume = parseFloat(out.area) * parseFloat(out.height) * 2;
+  density_map = new Map();
+  density_map.set("apple", 1.201);
+  density_map.set("egg", 2.031);
+  density_map.set("banana", 2);
+  density_map.set("chocolate bar", 2.025);
+  density_map.set("default", 1);
+
+  mass = density_map.has(out.name)
+    ? density_map.get(out.name) * volume
+    : volume;
   request.post(
     {
       url: "https://trackapi.nutritionix.com/v2/natural/nutrients",
