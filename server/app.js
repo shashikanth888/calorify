@@ -6,7 +6,7 @@ const Clarifai = require("clarifai");
 var imgur = require("imgur");
 const axios = require("axios");
 
-const model = new Clarifai.App({ apiKey: "1f9bb490007547d4a0070b895e9487e2" });
+const model = new Clarifai.App({ apiKey: KEY1 });
 
 var port = process.env.PORT || 4060;
 
@@ -90,7 +90,7 @@ let calc_macro = (out, res) => {
       headers: {
         "Content-Type": "application/json",
         "x-app-id": "728a7023",
-        "x-app-key": "f8e3dbfdcbf2ed6634fc902128695159"
+        "x-app-key": 
       }
     },
     function(error, response, body) {
