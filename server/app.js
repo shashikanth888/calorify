@@ -90,7 +90,7 @@ let calc_macro = (out, res) => {
       headers: {
         "Content-Type": "application/json",
         "x-app-id": "728a7023",
-        "x-app-key": 
+        "x-app-key": KEY2
       }
     },
     function(error, response, body) {
